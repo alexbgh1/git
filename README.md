@@ -1,6 +1,13 @@
-# Instalación
+# ¿Qué es git?
+Es un sistema de control de versiones, escencialmente para trabajar con muchas personas, permitiendo el trabajo "independiente" para posteriormente juntar el trabajo.
 
-La instalación oficial
+Se basa en un sistema de **"branches"** o **"ramas"**, donde existe una principal que llevará todos los cambios actualizados, se podrán crear distintas **ramas**, por ejemplo, para añadir características.
+
+![git_branch](https://i.imgur.com/AMX6jQG.png])
+
+## Instalación
+
+La instalación oficial se encuentra en:
 - [Git en Windows](https://git-scm.com/download/linux)
 - [Git en Linux/Unix](https://git-scm.com/download/linux)
 
@@ -71,8 +78,8 @@ $ git init nuevo-proyecto --initial-branch=master
 
 ### Verificar el estado de los archivos
 Podemos visualizar el estado de los archivos que está o no considerando git.
-- En rojo se presentan los archivos no trackeados, es decir, los que no han sido considerados para la subida a la nube.
-- En verde se presentan los archivos trackeados, es decir, los archivos que serán considerados para la subida a la nube.
+- En **rojo** se presentan los archivos no trackeados, es decir, los que no han sido considerados para la subida a la nube.
+- En **verde** se presentan los archivos trackeados, es decir, los archivos que serán considerados para la subida a la nube.
 ~~~bash
 $ git status
 ~~~
@@ -91,7 +98,7 @@ Con git inicializado, bastará con añadir cualquier archivo a la carpeta en la 
 
 Para que git los detecte, deberemos añadir el contenido que queramos. Nuevamente podemos verificar el estado de los archivos con **"git status"**.
 
-Esto corresponde a una etapa previa, de **"preparación"** en donde seleccionamos que archivos y carpetas queremos considerar antes de subirlas a la nube.
+Esto corresponde a una etapa previa, de **"preparación"** en donde seleccionamos que archivos y carpetas queremos considerar antes de subirlas con un commit.
 
 ### ⬆️ Agregar archivos
 - 📄📄 Añadir uno o varios documentos.
@@ -104,7 +111,7 @@ $ git add .
 ~~~
 
 ### ⬇️ Resetear
-Indica archivos que no se incluirán para la "subida a la nube".
+Indica archivos que no se incluirán para el commit.
 - 📄📄 Resetear uno o varios documentos.
 - 📂 Resetear una carpeta .
 - 📂📂 Resetear todo.
@@ -164,21 +171,34 @@ $ git show e4196bb496f4ff774638a618a4eef7e48e95cbb8
 
 
 ### Hice un commit pero me equivoqué
-¿Qué hacer si accidentalmente subí 2 commits que no debía y quiero volver atrás, sin perder los cambios?
+- ¿Qué hacer si accidentalmente subí 2 commits que no debía y quiero volver atrás?
 
-  1. **Ej:** Solo quiero eliminar el último commit.
+  1. **Ej:** Solo quiero eliminar el último commit sin perder los cambios.
   
       ~~~bash
-      $ git reset HEAD~1
+      $ git reset --soft HEAD~1
       ~~~
       <sub>El **1** es opcional para decir cuántos commits queremos volver. Por defecto es 1.</sub>
-  2. **Ej:** Quiero eliminar (todos) ambos commits.
+  2. **Ej:** Quiero eliminar (todos) ambos commits sin perder los cambios
       ~~~bash
-      $ git reset HEAD^
+      $ git reset --soft HEAD^
+      ~~~
+  3. **Ej:** Quiero eliminar el último commit, y que además lo quite de archivos añadidos (**git add**)
+      ~~~bash
+      $ git reset --mixed HEAD~1
+      ~~~
+  4. **Ej:** Quiero deshacer por completo el último commit, eliminando los archivos que subí.
+      ~~~bash
+      $ git reset --hard HEAD~1
       ~~~
 
-## Restaurar un archivo dado el último commit "ya en la nube"
-Puedes utilizar **restore** a partir de la versión 2.23.
+- El último commit que hice tiene un comentario que no está bien, ¿Cómo lo cambio?
+  ~~~bash
+   git commit --amend -m "Este es mi nuevo mensaje"
+  ~~~
+
+### Restaurar un archivo dado el último commit en la nube
+Puedes utilizar **restore** a partir de la versión 2.23. Restaura el archivo dado el último commit en el entorno remoto.
   - El **punto** considera restaurar todos los archivos.
   - El **asterisco** considera cualquier secuencia de caracteres, es decir, un documento cualquiera con terminación ".txt": 📄.txt
 
@@ -192,6 +212,5 @@ o **checkout**
 $ git checkout -- archivo_especifico.txt
 $ git checkout .
 $ git checkout -- '*.txt'
-<sub>Los guines indican que se busca un archivo en específico. Ya que **git checkout** también es utilizado para cambiar entre branch/ramas.</sub>
 ~~~
-
+<sub>Los guines indican que se busca un archivo en específico. Ya que **git checkout** también es utilizado para cambiar entre branch/ramas.</sub>
