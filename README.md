@@ -214,3 +214,89 @@ $ git checkout .
 $ git checkout -- '*.txt'
 ~~~
 <sub>Los guines indican que se busca un archivo en específico. Ya que **git checkout** también es utilizado para cambiar entre branch/ramas.</sub>
+
+# Ramas
+Muchos comandos referente a visualizar, mezclar, crear o eliminar ramas nuevas. Una rama se establece como una especie de camino alternativo para nuestro trabajo actual, esto quiere decir, podemos crear estas ramas para crear nuevas "features" (características) y luego acoplarlas a nuestra rama main (principal), permitiendo así el trabajo en paralelo para un proyecto.
+
+## 📝 Listar ramas
+#### Tags: git branch 
+
+   1. Listar ramas existentes
+      ~~~bash
+      $ git branch
+      ~~~
+
+   2. Listar ramas por fecha de creación
+      ~~~bash
+      $ git branch --sort=-committerdate
+      ~~~
+
+   3. Listar rama actual
+      ~~~bash
+      $ git branch --show-current
+      ~~~
+
+## Crear ramas
+#### Tags: git branch, git switch, git checkout
+Hay al menos 3 equivalencias para crear una rama y cambiarse a esta.
+
+   1. Crear y moverse (por separado)
+      ~~~bash
+      $ git branch nueva-rama
+      $ git switch nueva-rama
+      ~~~
+   2. Crear y moverse (a la vez)
+      ~~~bash
+      $ git switch -c nueva-rama
+      ~~~   
+   3. Crear y moverse (a la vez)
+      ~~~bash
+      $ git checkout -b nueva-rama
+      ~~~
+
+## Eliminar ramas
+#### Tags: git branch
+
+   1. Eliminar una rama
+      ~~~bash
+      $ git branch --delete nueva-rama
+      ~~~
+   2. Eliminar una rama que no ha sido fusionada.
+      ~~~bash
+      $ git branch -D nueva-rama
+      ~~~
+
+## Fusionar ramas
+Si tenemos más de una rama y queremos fusionar nuestros avances deberemos utilizar uno de estos comandos según nuestra conveniencia.
+#### Tags: git merge
+
+   1. Merge.
+      ~~~bash
+      $ git merge <nueva-rama>
+      ~~~
+   2. Merge - fast forward. Hará un merge fast forward solo si es posible, se puede usar cuando el <feature> va por delante de la rama main.
+      ~~~bash
+      $ git switch main
+      $ git merge --ff-only <feature>
+      ~~~
+   3. Merge - no fast forward. El caso de uso es equivalente a **crear una rama**, hacer un commit, volver al **main** y hacer otro commit.
+      ~~~bash
+      $ git switch main
+      $ git switch -c feature
+      $ git commit -m "commit 1 feature"
+      $ git switch main
+      $ git commit -m "commit 1 main"
+      $ git merge feature --no-ff
+      ~~~
+   3. Merge - squash. Este tipo de fusión de cambios hace la fusión y junta todos los commits de la rama de origen en un solo commit que debe ser confirmado. Esto se conoce como squash.
+      ~~~bash
+      $ git switch - c feature
+      $ git commit -m "commit 1"
+      $ git commit -m "commit 2"
+      $ git commit -m "commit 3"
+      $ git switch main
+      $ git merge feature --squash
+      $ git commit -m "Merge feature"
+
+   ~~~
+
