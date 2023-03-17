@@ -139,7 +139,7 @@ $ git clean -nfi
 
 
 ## Commit 2️⃣
-#### Tags: git commit, git log, git show, git reset
+#### Tags: git commit, git log, git show, git reset, git reflog
 Una vez evaluado los archivos que queremos subir (datos añadidos con **git add**) deberemos hacer un commit, que es equivalente a una confirmación de los archivos que subiremos. Guardará el **autor** y **fecha** del commit, además de un **hash** con información del commit.
 
 Utilizaremos el flag **-m** (de message) para dar el motivo, podemos incluir más de un mensaje.
@@ -191,6 +191,12 @@ $ git show e4196bb496f4ff774638a618a4eef7e48e95cbb8
       ~~~bash
       $ git reset --hard HEAD~1
       ~~~
+  5. **Podemos volver a un commit de esta manera** [fuente](https://stackoverflow.com/questions/5473/how-can-i-undo-git-reset-hard-head1)
+      ~~~bash
+      $ git reflog
+      $ git reset --hard <hash_commit_al_que_quiero_volver>
+      ~~~
+     
 
 - El último commit que hice tiene un comentario que no está bien, ¿Cómo lo cambio?
   ~~~bash
@@ -256,6 +262,8 @@ Hay al menos 3 equivalencias para crear una rama y cambiarse a esta.
 
 ## Eliminar ramas
 #### Tags: git branch
+Cuando eliminamos una **rama** nos dirá la referencia.
+**Ej:** "Deleted branch mi-rama (was 684fa35)."
 
    1. Eliminar una rama
       ~~~bash
@@ -264,6 +272,10 @@ Hay al menos 3 equivalencias para crear una rama y cambiarse a esta.
    2. Eliminar una rama que no ha sido fusionada.
       ~~~bash
       $ git branch -D nueva-rama
+      ~~~
+   3. Para recuperarla
+      ~~~
+      $ git branch master2 <hash_branch_a_recuperar>
       ~~~
 
 ## Fusionar ramas
