@@ -371,49 +371,49 @@ Si tenemos más de una rama y queremos fusionar nuestros avances deberemos utili
 ### Listar todas las branches (locales y remotas)
 
 ```bash
-git branch -a
+$ git branch -a
 ```
 
 ### Crear una nueva branch (comandos equivalentes)
 
 ```bash
-git branch branch_name
-git checkout -b branch_name
+$ git branch branch_name
+$ git checkout -b branch_name
 ```
 
 ### Cambiar de branch (comandos equivalentes)
 
 ```bash
-git checkout branch_name
-git switch branch_name
+$ git checkout branch_name
+$ git switch branch_name
 ```
 
 ### Fusionar una branch con la actual
 
 ```bash
-git merge branch_name
+$ git merge branch_name
 ```
 
 ### Ver el historial de commits de una branch
 
 ```bash
-git log
+$ git log
 ```
 
 ### Borrar una branch local
 
 ```bash
-git branch -d branch_name
+$ git branch -d branch_name
 ```
 
 ### Borrar una branch remota
 
 ```bash
-git push origin --delete branch_name
+$ git push origin --delete branch_name
 ```
 
 ### Recuperar un archivo de un commit anterior
 
 ```bash
-git checkout branch_id -- README.md
+$ git checkout branch_id -- README.md
 ```
